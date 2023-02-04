@@ -5,6 +5,22 @@
     gap: 12px;
 }
 
+.options {
+    display: flex;
+    gap: 50px;
+}
+
+button {
+    color: white;
+    font-size: 20px;
+    background-color: rgb(118, 200, 118);
+    border-radius: 3px;  
+}
+
+button:hover {
+    background-color: lightgray;
+}
+
 .row {
     display: flex;
     height: 60px;
@@ -46,4 +62,5 @@
     height: 40px;
     width: 30px;
     border: 1px solid;
+    border-radius: 5px;
 }
