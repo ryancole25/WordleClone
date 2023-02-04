@@ -64,3 +64,39 @@ button:hover {
     border: 1px solid;
     border-radius: 5px;
 }
+
+.enter {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-family: serif;
+    font-size: 18px;
+    height: 40px;
+    width: 70px;
+    border: 1px solid;
+    border-radius: 5px;
+}
+
+.delete {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-family: serif;
+    font-size: 18px;
+    height: 40px;
+    width: 50px;
+    border: 1px solid;
+    border-radius: 5px;
+}
+
+.github {
+    width: 20px;
+}
+
+.footer {
+    font-family: Helvetica;
+    margin-top: 20px;
+    display: flex;
+    align-items: center;
+    gap: 5px;
+}
