@@ -1,16 +1,11 @@
-// TODO
-// Add game visual effects
-// Add new game button
-// Add winner/loser on screen
-// Add invalid word on screen
-
+// Import a list of acceptable words and assign the word randomly
 import {wordList} from "./wordlist.js";
 let randomWord = getRandomWord();
-console.log(randomWord);
 
 // Controls whether keys can be added
 let addMore = true;
 
+// Variables for the different elements on screen
 const squares = document.querySelectorAll('.box');
 const rows = document.querySelectorAll('.row');
 const restart = document.querySelector('.restart');
@@ -18,6 +13,7 @@ const keys = document.querySelectorAll('.letters');
 const enterButton = document.querySelector('.enter');
 const delButton = document.querySelector('.delete');
 const newGameButton = document.querySelector('.new-game');
+const winner = document.querySelector('.win');
 
 // Once you click enter and your word is accepted, the row becomes complete and cannot be changed
 let rowComplete = {
@@ -29,6 +25,7 @@ let rowComplete = {
     6: false,
 }
 
+// Event listeners for different elements on screes
 keys.forEach(key => key.addEventListener('click', function(){
     fillBoxes(key.textContent);
 }))
@@ -49,19 +46,26 @@ const typing = window.addEventListener('keydown', function(letter){
     determineKey(letter);
 });
 
+newGameButton.addEventListener("click", function(){
+    newGame();
+})
+
+// Gets a random word from the approved list
 function getRandomWord(){
     return wordList[Math.floor(Math.random() * wordList.length)].toUpperCase();
 }
 
-// Clears all the squares
+// Clears all the squares and reassigns things to how they started
 function clearGame(){
     squares.forEach(square => {
         square.textContent = '';
         square.style.backgroundColor = "white";
+        square.style.color = 'black';
     });
 
     keys.forEach(key => {
         key.style.backgroundColor = "white";
+        key.style.color = "black";
     });
 
     rowComplete = {
@@ -72,7 +76,14 @@ function clearGame(){
         5: false,
         6: false,
     }
+    winner.textContent = "Enter a word";
     addMore = true;
+}
+
+// Starts a new game with a new random word
+function newGame(){
+    clearGame();
+    randomWord = wordList[Math.floor(Math.random() * wordList.length)].toUpperCase();
 }
 
 // Gets a letter from the keyboard input
@@ -102,7 +113,6 @@ function enterWord(){
                 break;
             }
             else{
-                console.log("Invalid Word");
                 break;
             }
         }
@@ -113,9 +123,11 @@ function enterWord(){
 function checkValidWord(boxes){
     let boxesWord = (boxes[0].textContent + boxes[1].textContent + boxes[2].textContent + boxes[3].textContent + boxes[4].textContent)
     if (wordList.includes(boxesWord.toLowerCase())){
+        winner.textContent = "Enter another word";
         return true;
     }
     else{
+        winner.textContent = "Invalid word";
         return false;
     }
 }
@@ -127,10 +139,12 @@ function wordComparison(rowIndex)
         // check if each letter is in the word
         for (let i = 0; i < 5; i ++){
             if (randomWord.includes(boxes[i].textContent)){
-                boxes[i].style.backgroundColor = "yellow";
+                boxes[i].style.backgroundColor = "rgb(194, 182, 8)";
+                boxes[i].style.color = "white";
             }
             else{
-                boxes[i].style.backgroundColor = "lightgrey";
+                boxes[i].style.backgroundColor = "rgb(99, 97, 97)";
+                boxes[i].style.color = "white";
             }
             // check if each letter is in the right place
             if (boxes[i].textContent == randomWord[i]){
@@ -143,6 +157,7 @@ function wordComparison(rowIndex)
                 if (keys[k].textContent == boxes[j].textContent){
                     if (keys[k].style.backgroundColor != "green"){
                         keys[k].style.backgroundColor = boxes[j].style.backgroundColor;
+                        keys[k].style.color = boxes[j].style.color;
                     }
                 }
             }
@@ -154,11 +169,19 @@ function wordComparison(rowIndex)
 function checkWinner(rowIndex){
     let boxes = rows[rowIndex].querySelectorAll('.box');
     for (let i = 0; i < 5; i ++){
+        if (rowIndex == 5 && boxes[i].backgroundColor != "green"){
+            winner.textContent = `You lose! The word was ${randomWord}`;
+        }
         if (boxes[i].style.backgroundColor != "green"){
             return;
         }
     }
-    console.log("WINNER");
+    if (rowIndex == 0){
+        winner.textContent = `You win! It took you ${rowIndex + 1} guess`
+    }
+    else{
+        winner.textContent = `You win! It took you ${rowIndex + 1} guesses`
+    }
     addMore = false;
 }
 
@@ -189,7 +212,7 @@ function fillBoxes(letter){
 
 }
 
-// Use the backspace key to delete the row you are working on
+// Use the backspace key to delete from the row you are working on
 function deleteBoxContent(){
     addMore = true;
     let stopCheck = false;

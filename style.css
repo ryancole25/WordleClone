@@ -1,3 +1,14 @@
+body {
+    background-color: lightgrey;
+}
+
+h1 {
+    font-family: Helvetica;
+    font-weight: bold;
+    font-size: 50px;
+    margin-bottom: 0px;
+}
+
 .mastercontainer {
     display: flex;
     flex-direction: column;
@@ -13,12 +24,15 @@
 button {
     color: white;
     font-size: 20px;
-    background-color: rgb(118, 200, 118);
+    background-color: rgb(48, 48, 48);
     border-radius: 3px;  
+    border: solid 2px;
+    border-color: black;
 }
 
 button:hover {
-    background-color: lightgray;
+    background-color: rgb(255,255,255);
+    color:black;
 }
 
 .row {
@@ -37,7 +51,9 @@ button:hover {
     width: 60px;
     border: solid 2px;
     border-color: black;
-
+    border-radius: 8px;
+    background-color: white; 
+    color: black;
 }
 
 .keyboard {
@@ -63,6 +79,8 @@ button:hover {
     width: 30px;
     border: 1px solid;
     border-radius: 5px;
+    background-color: white;
+    font-family: Arial;
 }
 
 .enter {
@@ -75,6 +93,7 @@ button:hover {
     width: 70px;
     border: 1px solid;
     border-radius: 5px;
+    background-color: white;
 }
 
 .delete {
@@ -87,6 +106,7 @@ button:hover {
     width: 50px;
     border: 1px solid;
     border-radius: 5px;
+    background-color: white;
 }
 
 .github {
@@ -99,4 +119,11 @@ button:hover {
     display: flex;
     align-items: center;
     gap: 5px;
+    font-family: Helvetica;
+}
+
+.win {
+    font-family: Arial;
+    padding: 0px;
+    font-size: 30px;
 }
