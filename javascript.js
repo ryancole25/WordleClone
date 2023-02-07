@@ -1,6 +1,7 @@
 // Import a list of acceptable words and assign the word randomly
 import {wordList} from "./wordlist.js";
 let randomWord = getRandomWord();
+console.log(randomWord);
 
 // Controls whether keys can be added
 let addMore = true;
